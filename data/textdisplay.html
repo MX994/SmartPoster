@@ -1,0 +1,42 @@
+<html>
+  <head>
+    <title>IbraBoard</title>
+  </head>
+  <body>
+    <center>
+      <h1>IbraBoard</h1>
+      <nav class="nav nav-masthead justify-content-center float-md-center">
+        <a class="nav-link active" aria-current="page" href="textdisplay.html">Text Display</a>
+        <a class="nav-link" href="imagedisplay.html">Image Display</a>
+        <a class="nav-link" href="#">Streaming Mode</a>
+      </nav>
+      <hr>
+      <h2>You are currently in "Text Display Mode".</h2>
+      <p>Displays a variable length string, in any 24-bit color.</p>
+      <form action="/updateTextDisplay">
+        <div class="row">
+          <div class="col-sm-4">
+            <input type="text" name="message" class="form-control" placeholder="Message" aria-label="Message">
+          </div>
+          <div class="col-sm-4">
+            <input type="number" name="y_offset" class="form-control" placeholder="Y Offset" aria-label="Y Offset">
+          </div>
+          <div class="col-sm-4">
+            <input type="color" name="color" class="form-control" placeholder="Color" aria-label="Color">
+          </div>
+          <br>
+          <div class="col-sm-4">
+            <input type="checkbox" name="scroll" class="form-control" placeholder="Scroll" aria-label="Scroll">
+            <label for="scroll">Scrolling Text</label>
+          </div>
+        </div>
+        <br>
+        <div class="row">
+          <div class="center col-12">
+            <button type="submit" class="btn btn-primary">Update Display</button>
+          </div>
+        </div>
+      </form>
+    </center>
+  </body>
+</html>
