@@ -31,7 +31,7 @@ void changeState(int newState) {
 }
 
 void setup() {
-  Serial.begin(9600);
+  Serial.begin(921600);
   if (!SPIFFS.begin()) {
      Serial.println("SPIFFS failed.");
      return;
@@ -42,8 +42,9 @@ void setup() {
   matrix->begin();
   matrix->setTextWrap(false);
   matrix->setRemapFunction(remapXY);
-  matrix->setBrightness(8);
+  matrix->setBrightness(32);
   matrix->setTextColor(color);
+  changeState(STATE_STREAM);
 
   server.on("/", HTTP_GET, [](AsyncWebServerRequest *request) {
     request->send(SPIFFS, "/index.html", "text/html");
@@ -116,6 +117,28 @@ void loop() {
       break;
     }
     case STATE_STREAM: {
+      while (Serial.available() < 4);
+      unsigned int magic = Serial.read() | (Serial.read() << 0x8) | (Serial.read() << 0x10) | (Serial.read() << 0x18);
+      if (magic != 0x49425241) {
+        // Clear Serial buffer - invalid.
+        while (Serial.available()) {
+          Serial.read();
+        }
+        return;
+      }
+      while (Serial.available() < 2);
+      uint8_t width = Serial.read(), height = Serial.read();
+      if (width > 0x20 || height > 0x20) {
+        return;
+      }
+      for (int y = 0; y < height; ++y) {
+        for (int x = 0; x < width; ++x) {
+          while (Serial.available() < 3);
+          unsigned char b = Serial.read(), g = Serial.read(), r = Serial.read();
+          matrix->drawPixel(x, y, CRGB(r, g, b));
+        }
+      }
+      matrix->show();
       break;
     }
   }
