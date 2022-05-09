@@ -8,7 +8,7 @@ Currently, it has three modes, toggleable via the onboard WiFi:
 - Image Display Mode: Allows me to display static image binaries, written to the microprocessor's flash, across the matrix.
 - Streaming Mode: Allows me to send frame data through UART, and display it on the matrix. To send data, use `Muxer.py` in the `src/Server` directory. It can be utilized as follows (after installing Python3, OpenCV, PySerial, Pillow, and imutils):
 
-> python Muxer.py <path to video>
+> python Muxer.py \<path to video\>
 
 
 ## Documentation
