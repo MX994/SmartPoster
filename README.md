@@ -24,9 +24,9 @@ struct Ibraboard_StaticImage {
 }
 
 struct StaticImageEntry {
-    byte blue;
-    byte green;
-    byte red;
+    uint8_t blue;
+    uint8_t green;
+    uint8_t red;
 }
 ```
 
@@ -40,8 +40,8 @@ struct Ibraboard_UARTImage {
 }
 
 struct ImageEntry {
-    byte blue;
-    byte green;
-    byte red;
+    uint8_t blue;
+    uint8_t green;
+    uint8_t red;
 }
 ```
